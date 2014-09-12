@@ -28,7 +28,7 @@ public class Bulletspeed : MonoBehaviour {
 			transform.Translate(Vector3.forward*bSpeed*Time.smoothDeltaTime); //move right * bSpeed * time.deltatime
 		}
 		else
-		{
+		{	
 			
 			if (hit.transform.gameObject.tag == "Ground") //if i hit an an object tagged as the ground
 			{
