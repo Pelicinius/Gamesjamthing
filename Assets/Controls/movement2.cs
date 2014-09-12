@@ -7,6 +7,11 @@ public class movement2 : MonoBehaviour
 
 	public float zSpeed =20.0f;
 	public string direction;
+	public float JumpSpeed= 100.0f;
+	public GameObject jim;
+	private float mouseX;
+	private float mouseZ;
+	private float pos;
 	// Update is called once per frame
 
 	void Update () 
@@ -14,37 +19,40 @@ public class movement2 : MonoBehaviour
 
 		HandleInput ();
 
-		float z = transform.position.z; 
-
 	}
 
 	void HandleInput() {
 
-		Debug.Log (direction);
+				Debug.Log (direction);
 		
-		if (Input.GetKey (KeyCode.W)) {
-			transform.Translate(0,0,zSpeed*Time.deltaTime);
-			direction = "up";
+				if (Input.GetKey (KeyCode.W)) {
+						transform.Translate (0, 0, zSpeed * Time.deltaTime);
+						direction = "up";
+
+				} else if (Input.GetKey (KeyCode.S)) {
+						transform.Translate (0, 0, -zSpeed * Time.deltaTime);
+						direction = "down";
+				}
+
+				if (Input.GetKey (KeyCode.A)) {
+						transform.Translate (-zSpeed * Time.deltaTime, 0, 0);
+						direction = "left";
+				} else if (Input.GetKey (KeyCode.D)) {
+						transform.Translate (zSpeed * Time.deltaTime, 0, 0);
+						direction = "right";
+				}
+				if (Input.GetKeyUp (KeyCode.Space)) 
+				{
+					Jump ();
+				}
 
 		}
-		else if (Input.GetKey (KeyCode.S))
+		
+		void Jump()
 		{
-			transform.Translate(0,0,-zSpeed*Time.deltaTime);
-			direction="down";
+			rigidbody.AddForce(Vector3.up*JumpSpeed);
 		}
-
-		if (Input.GetKey (KeyCode.A)) 
-		{
-			transform.Translate(-zSpeed*Time.deltaTime,0,0);
-			direction="left";
-		}
-		else if (Input.GetKey (KeyCode.D))
-		{
-			transform.Translate(zSpeed*Time.deltaTime,0,0);
-			direction="right";
-		}
-	
 
 
 	}
-}
+
